@@ -1,0 +1,81 @@
+{% extends 'detector/layout.html' %}
+
+{% block body %}
+<div class="max-w-screen min-h-screen">
+<div class="flex flex-col bg-white justify-top items-center pt-2">
+    <div class="flex w-full justify-center text-[#1971A4]">
+        <span class="typed-text font-extrabold text-4xl">Check if a Transaction is <span class="text-[#CC0000]">FRAUD</span> or <span class="text-[#236615]">LEGIT</span>!</span>
+        <span class="typed-text font-extrabold text-4xl cursor blink">|</span>
+    </div>
+
+    <form class="grid grid-cols-2 gap-2 w-2/3 mx-auto pt-12 relative p-4">
+
+      <!-- Blinking overlay box -->
+      <div class="opacity-20 absolute top-6 left-0 w-full h-full flex items-center justify-center overlay animate-blink">
+        {% if 0 in result %}
+        <div class="bg-[#236615] w-full h-full rounded-md">
+        </div>
+        {% else %}
+        <div class="bg-[#CC0000] w-full h-full rounded-md">
+        </div>
+        {% endif %}
+      </div>
+
+      <!--Form Fields-->
+      <div class="mb-5">
+        <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Steps</label>
+        <input type="number" id ='step' class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500",
+                placeholder = '{{ step }}' disabled>
+      </div>
+      <div class="mb-5">
+        <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Amount</label>
+        <input type="number" id ='amount' class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500",
+                placeholder = '{{ amount }}' disabled>
+      </div>
+      <div class="mb-5">
+        <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Old Balance in Origin</label>
+        <input type="number" id ='oldbO' class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500",
+                placeholder = '{{ oldbalanceOrg }}' disabled>
+      </div>
+      <div class="mb-5">
+        <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">New Balance in Origin</label>
+        <input type="number" id ='newbO' class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500",
+                placeholder = '{{ newbalanceOrig }}' disabled>
+      </div>
+      <div class="mb-5">
+        <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Old Balance in Destination</label>
+        <input type="number" id ='oldbD' class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500",
+                placeholder = '{{ oldbalanceDest }}' disabled>
+      </div>
+      <div class="mb-5">
+        <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">New Balance in Destination</label>
+        <input type="number" id ='newbD' class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500",
+                placeholder = '{{ newbalanceDest }}' disabled>
+      </div>
+      <div class="mb-5">
+        <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Transaction Type</label>
+        <input type="number" id ='tType' class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500",
+                placeholder = '{{ transaction_type }}' disabled>
+      </div>
+      <div class="flex mt-6 ml-2">
+        <label class="block pt-1 text-sm font-medium text-gray-900 dark:text-white">Is Flagged Fraud </label>
+        {% if isFlaggedFraud == False %}<div class="px-2 text-xl font-semibold text-[#236615]"> {{ isFlaggedFraud }} </div>
+        {% else %} <div class="px-2 text-lx font-semibold text-[#CC0000]"> {{ isFlaggedFraud }} </div>
+        {% endif %}
+      </div>
+</form>
+</div>
+  <div class="flex pt-12 w-full bg-white justify-center font-bold text-2xl">
+  <div>
+  {% if 0 in result %}
+  <div class="text-[#236615] rounded-md">
+  The transaction is LEGIT :)</div>
+  {% else %}
+  <div class="text-[#CC0000] rounded-md">
+  The transaction is FRAUDULENT :(
+  </div>
+  {% endif %}
+  </div>
+</div>
+</div>
+{% endblock %}

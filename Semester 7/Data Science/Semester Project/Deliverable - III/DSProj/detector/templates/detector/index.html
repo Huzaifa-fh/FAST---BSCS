@@ -1,10 +1,50 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
-HELLOOOOO
-</body>
-</html>
+{% extends 'detector/layout.html' %}
+
+{% block body %}
+<div class="background-animation flex flex-col max-w-screen min-h-screen bg-white justify-top items-center pt-2">
+    <div class="flex w-full justify-center text-[#1971A4]">
+        <span class="typed-text font-extrabold text-4xl">Check if a Transaction is <span class="text-[#CC0000]">FRAUD</span> or <span class="text-[#236615]">LEGIT</span>!</span>
+        <span class="typed-text font-extrabold text-4xl cursor blink">|</span>
+    </div>
+<!--form -->
+
+
+<form action="{% url 'transaction_form' %}" method="post" class="grid grid-cols-2 gap-2 w-2/3 mx-auto pt-12">
+    {% csrf_token %}
+      <div class="mb-5">
+        <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Steps</label>
+        {{ form.step }}
+      </div>
+      <div class="mb-5">
+        <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Amount</label>
+        {{ form.amount }}
+      </div>
+      <div class="mb-5">
+        <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Old Balance in Origin</label>
+        {{ form.oldbalanceOrg }}
+      </div>
+      <div class="mb-5">
+        <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">New Balance in Origin</label>
+        {{ form.newbalanceOrig }}
+      </div>
+      <div class="mb-5">
+        <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Old Balance in Destination</label>
+        {{ form.oldbalanceDest }}
+      </div>
+      <div class="mb-5">
+        <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">New Balance in Destination</label>
+        {{ form.newbalanceDest }}
+      </div>
+      <div class="mb-5">
+        <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Transaction Type</label>
+        {{ form.transaction_type }}
+      </div>
+      <div class="flex mt-6">
+          <div class="px-2"> {{ form.isFlaggedFraud }} </div>
+        <label class="block pt-1 text-sm font-medium text-gray-900 dark:text-white">Is Flagged Fraud</label>
+      </div>
+
+    <button type="submit" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Submit</button>
+</form>
+</div>
+{% endblock %}
