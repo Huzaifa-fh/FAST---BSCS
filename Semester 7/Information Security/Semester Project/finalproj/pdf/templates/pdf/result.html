@@ -1,0 +1,24 @@
+{% extends 'pdf/layout.html' %}
+
+{% block body %}
+<div class="flex flex-col max-w-screen min-h-screen bg-white justify-center items-center pt-12">
+    <div class="font-bold text-3xl">
+        {% if 'no' in model_result %}
+            <div class="text-[#236615]">Your PDF is Safe</div>
+        {% else %}
+            <div class="text-[#CC0000]">This is a Malicious PDF</div>
+        {% endif %}
+    </div>
+    <div class="p-2 relative">
+        {% if pdf_file %}
+            <embed src="{{ pdf_file }}" type="application/pdf" height="700px" width="500">
+            <!-- Black rectangle overlay -->
+                    {% if 'no' in model_result %}
+                        <div class="absolute top-10 bg-[#236615] opacity-20 w-11/12 h-full"></div>
+                    {% else %}
+                        <div class="absolute top-10 bg-[#CC0000] opacity-20 w-11/12 h-full"></div>
+                    {% endif %}
+        {% endif %}
+    </div>
+</div>
+{% endblock %}

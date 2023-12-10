@@ -1,0 +1,19 @@
+{% extends 'pdf/layout.html' %}
+
+{% block body %}
+<div class=" flex flex-col max-w-screen min-h-screen bg-white justify-top items-center pt-12">
+    {% if request.path != '/pdf/upload_file/' %}
+    <div class="flex w-full justify-center">
+        <span class="typed-text font-extrabold text-4xl text-[#1A2D4B]">Upload a PDF and Check if it is <span class="text-[#236615]">SAFE</span> or <span class="text-[#CC0000]">MALICIOUS</span>!</span>
+        <span class="typed-text font-extrabold text-4xl cursor blink text-[#1A2D4B]">|</span>
+    </div>
+    {% endif %}
+    <form action="{% url 'upload_file' %}" method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        <p>
+            {{ form.file }}
+        </p>
+        <button type="submit" class="mt-4 text-white bg-gradient-to-r from-[#1A2D4B] to-[#CC0000] hover:bg-gradient-to-br font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2 transition ease-in-out delay-150 bg-blue-500 hover:-translate-y-1 hover:scale-110">Upload</button>
+    </form>
+</div>
+{% endblock %}
